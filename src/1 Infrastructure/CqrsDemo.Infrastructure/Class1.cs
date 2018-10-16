@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CqrsDemo.Api
+namespace CqrsDemo.Infrastructure
 {
     public class Class1
     {
