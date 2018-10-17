@@ -4,6 +4,6 @@ namespace CqrsDemo.Infrastructure.CQRS
 {
     public interface ICommandHandlerResolver
     {
-        ICommandHandler<ICommand<TResponse>, TResponse> Resolve<TResponse>(ICommand<TResponse> command);
+        dynamic Resolve<TResponse>(ICommand<TResponse> command);
     }
 }

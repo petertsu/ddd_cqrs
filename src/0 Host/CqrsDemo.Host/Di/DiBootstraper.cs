@@ -68,7 +68,7 @@ namespace CqrsDemo.Host.Di
             _ioc.Register(typeof(ICommandHandler<>), typeof(ICommandHandler<>).Assembly);
             _ioc.Register(typeof(ICommandHandler<,>), typeof(ICommandHandler<,>).Assembly);
 
-            _ioc.Register<ICommandDispatcher, CommandDispatcher>();
+            _ioc.Register<ICommandDispatcher, SinmpleInjectorCommandDispatcher>();
             _ioc.Register<ICommandHandlerResolver, SimpleInjectorCommandHandlerResolver>();
 
             // Allow Simple Injector to resolve services from ASP.NET Core.
