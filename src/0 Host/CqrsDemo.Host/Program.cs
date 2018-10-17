@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore;
+﻿using CqrsDemo.Host.Di;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CqrsDemo.Host
 {
@@ -12,6 +14,7 @@ namespace CqrsDemo.Host
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureServices(services => services.AddSingleton<DiBootstraper>())
                 .UseStartup<Startup>();
     }
 }

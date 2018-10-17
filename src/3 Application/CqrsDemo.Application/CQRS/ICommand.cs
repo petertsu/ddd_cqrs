@@ -1,10 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CqrsDemo.Application.CQRS
 {
-    public interface ICommand
+    public interface ICommand : ICommand<VoidResult>
+    {
+    }
+
+    public interface ICommand<out TResponse> : IBaseCommand
+    {
+    }
+
+    public interface IBaseCommand
     {
         Guid Id { get; }
     }

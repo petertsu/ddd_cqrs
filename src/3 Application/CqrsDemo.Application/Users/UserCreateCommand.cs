@@ -3,7 +3,7 @@ using CqrsDemo.Application.CQRS;
 
 namespace CqrsDemo.Application.Users
 {
-    public class UserCreateCommand : ICommand
+    public class UserCreateCommand : ICommand<int>
     {
         public UserCreateCommand(string firstname, string lastname)
         {
@@ -14,7 +14,6 @@ namespace CqrsDemo.Application.Users
         public Guid Id { get; }
         public string FirstName  { get; }
         public string LastName  { get; }
-
 
     }
 }

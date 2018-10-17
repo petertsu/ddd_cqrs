@@ -5,12 +5,12 @@ using CqrsDemo.Application.Users;
 
 namespace CqrsDemo.Api.Users
 {
-
     [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly ICommandDispatcher _commandDispather;
+
         public UsersController(ICommandDispatcher commandDispather)
         {
             _commandDispather = commandDispather;
@@ -18,31 +18,23 @@ namespace CqrsDemo.Api.Users
 
 
         [HttpPost]
-        public async  Task<IActionResult> Post()
+        public async Task<IActionResult> Post()
         {
-            var userCreateCommand = new UserCreateCommand("","");
+            var userCreateCommand = new UserCreateCommand("", "");
 
-            await _commandDispather.Execute(userCreateCommand);
+            var createdUserId = await _commandDispather.Execute(userCreateCommand);
 
-            return Ok();
-
-            //  return Created(Url.Action("GetById", ControllerContext.ActionDescriptor.ControllerName, userCreateCommand.Id ), null);
+            return Ok(createdUserId);
         }
 
-        [HttpGet("{id}")]
-        public async  Task<IActionResult> GetById(string id)
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int userId)
         {
-            await Task.Delay(1);
+            var userDeleteCommand = new UserDeleteCommand(userId);
 
-            return Ok();
-        }
+            await _commandDispather.Execute(userDeleteCommand);
 
-        [HttpGet]
-        public async  Task<IActionResult> Get()
-        {
-            await Task.Delay(1);
-
-            return Ok("Get");
+            return NoContent();
         }
     }
 }

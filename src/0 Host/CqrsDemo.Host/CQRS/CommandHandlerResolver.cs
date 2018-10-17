@@ -1,28 +1,29 @@
 ﻿using System;
 using CqrsDemo.Application.CQRS;
+using CqrsDemo.Infrastructure.CQRS;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleInjector;
 
 namespace CqrsDemo.Host.CQRS
 {
-    class CommandHandlerResolver : ICommandHandlerResolver
+    class SimpleInjectorCommandHandlerResolver : ICommandHandlerResolver
     {
         private readonly Container _ioc;
-        public CommandHandlerResolver(Container ioc)
+
+        public SimpleInjectorCommandHandlerResolver(Container ioc)
         {
             _ioc = ioc;
         }
-
-        public ICommandHandler<TCommand> Resolve<TCommand>() where TCommand : ICommand
+        
+        public ICommandHandler<ICommand<TResponse>,TResponse> Resolve<TResponse>(ICommand<TResponse> command)
         {
-            var handlerType =
-                typeof(ICommandHandler<>).MakeGenericType(typeof(TCommand));
+            var handlerType = typeof(ICommandHandler<,>).MakeGenericType(command.GetType(), typeof(TResponse));
 
-            var handler = _ioc.GetRequiredService(handlerType) as ICommandHandler<TCommand>;
+            var handler = _ioc.GetRequiredService(handlerType) as ICommandHandler<ICommand<TResponse>, TResponse>;
 
-            if(handler==null)
-                throw new InvalidOperationException($"Could not resolve command handler {handlerType}");
-
+            if (handler == null)
+                throw new InvalidOperationException($"{nameof(SimpleInjectorCommandHandlerResolver)} could not resolve command handler {handlerType}");
+            
             return handler;
         }
     }

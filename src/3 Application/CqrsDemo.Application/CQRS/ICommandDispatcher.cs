@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
 
+
 namespace CqrsDemo.Application.CQRS
 {
     public interface ICommandDispatcher
     {
-        Task Execute<TCommand>(TCommand command) where TCommand : ICommand;
+        Task<TResponse> Execute<TResponse>(ICommand<TResponse> command); 
+        Task Execute(ICommand<VoidResult> command); 
     }
 }
