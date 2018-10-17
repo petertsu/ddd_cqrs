@@ -28,8 +28,7 @@ namespace CqrsDemo.Host.Di
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddApplicationPart(typeof(UsersController).Assembly);
-
-
+            
             _ioc.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -68,9 +67,9 @@ namespace CqrsDemo.Host.Di
             _ioc.Register(typeof(ICommandHandler<>), typeof(ICommandHandler<>).Assembly);
             _ioc.Register(typeof(ICommandHandler<,>), typeof(ICommandHandler<,>).Assembly);
 
-            _ioc.Register<ICommandDispatcher, SinmpleInjectorCommandDispatcher>();
-            _ioc.Register<ICommandHandlerResolver, SimpleInjectorCommandHandlerResolver>();
-
+            _ioc.RegisterSingleton<ICommandDispatcher, CommandDispatcher>();
+            _ioc.RegisterSingleton<ICommandHandlersResolver, SimpleInjectorCommandHandlersResolver>();
+            
             // Allow Simple Injector to resolve services from ASP.NET Core.
             _ioc.AutoCrossWireAspNetComponents(app);
         }

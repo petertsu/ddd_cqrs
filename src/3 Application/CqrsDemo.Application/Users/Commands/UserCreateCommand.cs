@@ -1,7 +1,7 @@
 ﻿using System;
 using CqrsDemo.Application.CQRS;
 
-namespace CqrsDemo.Application.Users
+namespace CqrsDemo.Application.Users.Commands
 {
     public class UserCreateCommand : ICommand<int>
     {

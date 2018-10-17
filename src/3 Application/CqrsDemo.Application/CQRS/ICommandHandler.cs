@@ -2,7 +2,7 @@
 
 namespace CqrsDemo.Application.CQRS
 {
-    public interface ICommandHandler<in TCommand, TResponse>
+    public interface ICommandHandler<in TCommand, TResponse> : ICommandHandler
         where TCommand : ICommand<TResponse>
     {
         Task<TResponse> Execute(TCommand command);
@@ -12,4 +12,9 @@ namespace CqrsDemo.Application.CQRS
         where TCommand : ICommand<VoidResult>
     {
     }
+
+    public  interface ICommandHandler
+    {
+    }
+
 }

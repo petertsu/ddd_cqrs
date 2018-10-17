@@ -1,10 +1,9 @@
 ﻿using System;
 using CqrsDemo.Application.CQRS;
 
-
-namespace CqrsDemo.Application.Users
+namespace CqrsDemo.Application.Users.Commands
 {
-    public class UserDeleteCommand : ICommand<VoidResult>
+    public class UserDeleteCommand : ICommand
     {
         public UserDeleteCommand(int userId)
         {

@@ -2,16 +2,17 @@
 
 namespace CqrsDemo.Application.CQRS
 {
-    public interface ICommand : ICommand<VoidResult>
+    public interface IBaseCommand
     {
+        Guid Id { get; }
     }
 
     public interface ICommand<out TResponse> : IBaseCommand
     {
     }
 
-    public interface IBaseCommand
+    public interface ICommand : ICommand<VoidResult>
     {
-        Guid Id { get; }
     }
 }
+

@@ -1,8 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CqrsDemo.Application.CQRS;
+using CqrsDemo.Application.Users.Commands;
 
-namespace CqrsDemo.Application.Users
+namespace CqrsDemo.Application.Users.Handlers
 {
     internal class UserCreateCommandHandler : ICommandHandler<UserCreateCommand, int>
     {

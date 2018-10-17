@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using CqrsDemo.Application.CQRS;
-using CqrsDemo.Application.Users;
+using CqrsDemo.Application.Users.Commands;
 
 namespace CqrsDemo.Api.Users
 {
@@ -31,6 +31,16 @@ namespace CqrsDemo.Api.Users
         public async Task<IActionResult> Delete(int userId)
         {
             var userDeleteCommand = new UserDeleteCommand(userId);
+
+            await _commandDispather.Execute(userDeleteCommand);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(int userId)
+        {
+            var userDeleteCommand = new UserUpdateCommand(userId);
 
             await _commandDispather.Execute(userDeleteCommand);
 
