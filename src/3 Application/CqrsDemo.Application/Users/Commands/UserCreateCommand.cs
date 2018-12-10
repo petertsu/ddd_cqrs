@@ -16,4 +16,8 @@ namespace CqrsDemo.Application.Users.Commands
         public string LastName  { get; }
 
     }
+
+  
+
+
 }
